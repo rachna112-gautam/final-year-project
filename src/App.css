@@ -5,6 +5,12 @@
   color: #fff;
 }
 
+.Landing {
+  background-image: url("./assets/images.png");
+  background-position: center center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
 /**************HEADER****************/
 
 header {
@@ -66,7 +72,7 @@ a {
   margin-bottom: 1rem;
 }
 
-.main .btn.browsing {
+.btn.browsing {
   background: #ff2d55;
   color: #fff;
   font-size: 1rem;
@@ -78,7 +84,7 @@ a {
   transition: all 0.1s;
 }
 
-.main .btn.browsing:hover {
+.btn.browsing:hover {
   transform: translateY(-4px);
 }
 
@@ -270,4 +276,70 @@ footer ul li a:hover {
 
 .btn.register:hover {
   transform: translateY(-4px);
+}
+
+button.view-btn {
+  background: #3c80ce !important;
+}
+
+/*****************INDIVIDUAL-ITEM**************/
+.imgCon {
+  width: 100%;
+  height: 350px;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+}
+.imgCon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.ii .content-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ii .content-title .Owner {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+.ii .content-title .Owner a:hover {
+  color: #323036;
+}
+.ii .content-title .Owner i {
+  font-size: 2rem;
+  margin-left: 1rem;
+}
+
+.productDetail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.productDetail div span {
+  display: inline-block;
+  margin: 1rem 0.5rem;
+  font-size: 1.5rem;
+}
+
+.productDetail div span i {
+  margin-right: 0.5rem;
+}
+
+.highlights {
+  color: #5c5762;
+}
+
+.fa-star {
+  margin: 0.1rem;
+  color: #ff2d55;
+}
+
+.stars {
+  display: inline-block;
+  margin: 1rem 0;
 }

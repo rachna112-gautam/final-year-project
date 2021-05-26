@@ -7,30 +7,38 @@ import Item4 from './../../assets/item4.jpg';
 export default function Background() {
 
     const items = [{
+        id: 1,
         img: Item1,
-        price: 20,
-        title: 'title',
+        price: 20.9,
+        title: 'Purple Background',
         liked: '',
         added: '',
+        rating: 4
     }, {
+        Id: 2,
         img: Item2,
-        price: 20,
-        title: 'title',
+        price: 10.1,
+        title: 'Texture & Pattern',
         liked: '',
         added: 'added',
+        rating: 3
     }, {
+        Id: 3,
         img: Item3,
-        price: 20,
-        title: 'title',
+        price: 20.01,
+        title: 'Sunset Background',
         liked: '',
         added: '',
+        rating: 5
     },
     {
+        Id: 4,
         img: Item4,
-        price: 20,
-        title: 'title',
+        price: 17.020,
+        title: 'Vintage Car',
         liked: 'liked',
         added: '',
+        rating: 4
     },
 
     ]
