@@ -438,7 +438,7 @@ function App(){
         "type": "function"
       }
     ];
-      const contract = await new window.web3.eth.Contract(ABI, "0xf8eC50aE513834E664690825EE6465540da98551");
+      const contract = await new window.web3.eth.Contract(ABI, "0x346Bcd05F55Cb054F69fbA6955fE80c4F2f73b00");
       setContract(contract);
       console.log("contract",contract);
     
@@ -450,10 +450,7 @@ function App(){
       alert("Registered Successfully")
       console.log("Registered");
     })
-  }
-
-
-  
+  }  
   }
 
 
