@@ -1,7 +1,7 @@
 import React from 'react';
 import Footer from './Footer';
 import Header from './Header';
-export default function SignIn() {
+export default function SignIn(props) {
     return (
         <div className="signin">
             <Header />
@@ -11,7 +11,7 @@ export default function SignIn() {
                     <i class="fas fa-wallet"></i>
                 </div>
                 <p>You can use the <a href="https://metamask.io/" className="metamask">MetaMask</a> extension</p>
-                <button type="button" className="btn register">Register as Buyer</button>
+                <button type="button" className="btn register" onClick = {()=>{props.RegisterAsBuyer()}}>Register as Buyer</button>
             </div>
             <Footer />
         </div>

@@ -17,7 +17,9 @@ export default function Header() {
                 </ul>
             </div>
             <div className="signin-btn">
+
                 <a href="/signin">Sign in</a>
+                <a className="ml-3 d-block" href="#">Are You a Seller?</a>
             </div>
         </header>
     )
