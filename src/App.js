@@ -4,70 +4,70 @@ import Home from './components/Home';
 import SignIn from './components/SignIn';
 import IndividualItem from './components/IndividualItem';
 import Web3 from "web3";
-import { Component, useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
+import Browse from './components/Browse';
 
 
-function App(){
-  const [contract,setContract] = useState()
-  const [account,setAccount] = useState()
-  const [userInfo,setUserInfo] = useState()
+function App() {
+  const [contract, setContract] = useState();
+  const [account, setAccount] = useState();
 
-  useEffect(()=>{
-    setInterval(()=>{
+  useEffect(() => {
+    setInterval(() => {
       load();
       loadContract();
-      
-    },5000)
-   
-  },[])
 
-  useEffect(()=>{
+    }, 5000)
+
+  }, [])
+
+  useEffect(() => {
     getBuyerInfo();
     getItems();
-  },[contract,account])
+  }, [contract, account])
 
-    const loadWeb3 =async () => {
-      if (window.ethereum) {
-          window.web3 = new Web3(window.ethereum);
-          window.ethereum.enable();
-          let account = await window.web3.eth.getAccounts();
-          setAccount(account[0]);
-          console.log("account",account);
-      }
+  const loadWeb3 = async () => {
+    if (window.ethereum) {
+      window.web3 = new Web3(window.ethereum);
+      window.ethereum.enable();
+      let account = await window.web3.eth.getAccounts();
+      setAccount(account[0]);
+      console.log("account", account);
+    }
   }
-  
-   const load=async() =>{
-      await loadWeb3();
-      updateStatus('Ready!');
+
+  const load = async () => {
+    await loadWeb3();
+    updateStatus('Ready!');
   }
-  
-  const updateStatus=(status) =>{
-      const statusEl = document.getElementById('status');
-   
-      console.log(status);
+
+  const updateStatus = (status) => {
+    const statusEl = document.getElementById('status');
+
+    console.log(status);
   }
-  
-  const getItems = async()=>{
-    if(contract){
+
+  const getItems = async () => {
+    if (contract) {
       let totalItems = await contract.methods.totalItems().call();
       let items = [];
-      for(let i=1;i<=totalItems;i++){
-        let item= await contract.methods.products(i).call();
+      for (let i = 1; i <= totalItems; i++) {
+        let item = await contract.methods.products(i).call();
         items.push(item);
       }
-      console.log("items",items);
+      console.log("items", items);
     }
   }
-  
-  const getBuyerInfo = async()=>{
-    if(contract && account){
+
+  const getBuyerInfo = async () => {
+    if (contract && account) {
       let userInfo = await contract.methods.buyers(account).call();
-      console.log("userInfo",userInfo)
+      console.log("userInfo", userInfo)
 
     }
   }
 
-  const loadContract = async()=> {
+  const loadContract = async () => {
     let ABI = [
       {
         "inputs": [
@@ -438,19 +438,19 @@ function App(){
         "type": "function"
       }
     ];
-      const contract = await new window.web3.eth.Contract(ABI, "0x346Bcd05F55Cb054F69fbA6955fE80c4F2f73b00");
-      setContract(contract);
-      console.log("contract",contract);
-    
+    const contract = await new window.web3.eth.Contract(ABI, "0x346Bcd05F55Cb054F69fbA6955fE80c4F2f73b00");
+    setContract(contract);
+    console.log("contract", contract);
+
   }
-  
-  const RegisterAsBuyer = async()=>{
-    if(contract && account){
-    contract.methods.RegisterAsBuyer().send({from:account,value:0}).then(()=>{
-      alert("Registered Successfully")
-      console.log("Registered");
-    })
-  }  
+
+  const RegisterAsBuyer = async () => {
+    if (contract && account) {
+      contract.methods.RegisterAsBuyer().send({ from: account, value: 0 }).then(() => {
+        alert("Registered Successfully")
+        console.log("Registered");
+      })
+    }
   }
 
 
@@ -460,16 +460,19 @@ function App(){
         <Home />
       </Route>
       <Route exact path="/signin">
-        <SignIn RegisterAsBuyer = {RegisterAsBuyer} />
+        <SignIn RegisterAsBuyer={RegisterAsBuyer} />
       </Route>
       <Route exact path="/item">
         <IndividualItem />
       </Route>
+      <Route exact path="/browse">
+           <Browse />
+      </Route>
     </div>
 
   );
-  
-  
+
+
 }
 
 export default App;
