@@ -13,7 +13,8 @@ export default function Templates() {
         title: 'Portfolio Website',
         liked: '',
         added: '',
-        rating: 4
+        rating: 4,
+        type: 'template'
     }, {
         id: 2,
         img: template2,
@@ -21,7 +22,8 @@ export default function Templates() {
         title: 'Space theme template',
         liked: '',
         added: 'added',
-        rating: 4
+        rating: 4,
+        type: 'template'
     }, {
         id: 3,
         img: template3,
@@ -29,7 +31,8 @@ export default function Templates() {
         title: 'Real  estate website',
         liked: '',
         added: '',
-        rating: 4
+        rating: 4,
+        type: 'template'
     },
     {
         id: 4,
@@ -38,11 +41,12 @@ export default function Templates() {
         title: 'Business website',
         liked: 'liked',
         added: '',
-        rating: 4
+        rating: 4,
+        type: 'template'
     },
 
     ]
     return (
-        <Section items={items} title="Templates" />
+        <Section items={items} title="Template" />
     )
 }

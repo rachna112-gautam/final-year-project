@@ -105,11 +105,11 @@ a {
   font-weight: 400;
 }
 
-a.viewAll {
+.btn.viewAll {
   color: #ff2d55;
 }
 
-a.viewAll i {
+.btn.viewAll i {
   margin-left: 0.5rem;
 }
 
@@ -359,4 +359,11 @@ input[type="search"] {
 .btn-check:focus + .btn-outline-primary,
 .btn-outline-primary:focus {
   box-shadow: none !important;
+}
+
+.cat {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  color: #7d7d7d;
 }

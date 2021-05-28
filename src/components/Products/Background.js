@@ -13,36 +13,40 @@ export default function Background() {
         title: 'Purple Background',
         liked: '',
         added: '',
-        rating: 4
+        rating: 4,
+        type: 'background'
     }, {
-        Id: 2,
+        id: 2,
         img: Item2,
         price: 10.1,
         title: 'Texture & Pattern',
         liked: '',
         added: 'added',
-        rating: 3
+        rating: 3,
+        type: 'background'
     }, {
-        Id: 3,
+        id: 3,
         img: Item3,
         price: 20.01,
         title: 'Sunset Background',
         liked: '',
         added: '',
-        rating: 5
+        rating: 5,
+        type: 'background'
     },
     {
-        Id: 4,
+        id: 4,
         img: Item4,
         price: 17.020,
         title: 'Vintage Car',
         liked: 'liked',
         added: '',
-        rating: 4
+        rating: 4,
+        type: 'background'
     },
 
     ]
     return (
-        <Section items={items} title="Wallpaper" />
+        <Section items={items} title="Background" />
     )
 }

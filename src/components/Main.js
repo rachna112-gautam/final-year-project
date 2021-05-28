@@ -5,7 +5,11 @@ export default function main() {
     const history = useHistory();
 
     const browseHandle = () => {
-        history.push('/browse');
+        history.push({
+            pathname: '/browse',
+            search: `?search:all`,
+            state: { search: 'all' }
+        })
     }
     return (
         <div className="">
