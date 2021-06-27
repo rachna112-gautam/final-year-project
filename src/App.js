@@ -24,7 +24,8 @@ function App() {
   useEffect(() => {
     getBuyerInfo();
     getItems();
-  }, [contract, account])
+    getUsersPurchasedItems();
+  }, [account])
 
   const loadWeb3 = async () => {
     if (window.ethereum) {
@@ -68,6 +69,25 @@ function App() {
     }
   }
 
+  const getUsersPurchasedItems = async () => {
+    if (contract && account) {
+      let userInfo = []
+      let length = await contract.methods.totalPurchasesCount(account).call();
+      for (let i = 0; i < length; i++) {
+        userInfo[i] = await contract.methods.buyersPurchases(account, i).call();
+        console.log("id & details", await getItemsDetails(userInfo[i]))
+      }
+      console.log("purchases", userInfo)
+    }
+  }
+
+  const getItemsDetails = async (id) => {
+    if (contract) {
+      let item = await contract.methods.products(id).call();
+      console.log("item is", item)
+    }
+  }
+
   const loadContract = async () => {
     let ABI = [
       {
@@ -81,6 +101,16 @@ function App() {
             "internalType": "uint256",
             "name": "_price",
             "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_category",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "_imageUrl",
+            "type": "string"
           }
         ],
         "name": "AddItem",
@@ -292,6 +322,45 @@ function App() {
         "type": "function"
       },
       {
+        "inputs": [],
+        "name": "govAddress",
+        "outputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "judge",
+        "outputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "judgeAmount",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
         "inputs": [
           {
             "internalType": "uint256",
@@ -332,6 +401,11 @@ function App() {
             "type": "bool"
           },
           {
+            "internalType": "uint256",
+            "name": "category",
+            "type": "uint256"
+          },
+          {
             "internalType": "bool",
             "name": "isPurchased",
             "type": "bool"
@@ -345,6 +419,24 @@ function App() {
             "internalType": "bool",
             "name": "paymentRecieved",
             "type": "bool"
+          },
+          {
+            "internalType": "string",
+            "name": "imageUrl",
+            "type": "string"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "savingWallet",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
           }
         ],
         "stateMutability": "view",
@@ -394,6 +486,24 @@ function App() {
             "internalType": "uint256",
             "name": "amountWithdrawn",
             "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "stars",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "taxWallet",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
           }
         ],
         "stateMutability": "view",
@@ -426,6 +536,25 @@ function App() {
         "type": "function"
       },
       {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "name": "totalPurchasesCount",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
         "inputs": [],
         "name": "totalSellers",
         "outputs": [
@@ -439,7 +568,7 @@ function App() {
         "type": "function"
       }
     ];
-    const contract = await new window.web3.eth.Contract(ABI, "0x346Bcd05F55Cb054F69fbA6955fE80c4F2f73b00");
+    const contract = await new window.web3.eth.Contract(ABI, "0x2B18472912AceAd58f4FBAc37415879BFf880a65");
     setContract(contract);
     console.log("contract", contract);
 
