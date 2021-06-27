@@ -32,7 +32,8 @@ function App() {
       window.ethereum.enable();
       let account = await window.web3.eth.getAccounts();
       setAccount(account[0]);
-      console.log("account", account);
+      let balance = await window.web3.eth.getBalance(account[0])
+      console.log("account & balance", account, balance / 10 ** 18);
     }
   }
 
@@ -466,7 +467,7 @@ function App() {
         <IndividualItem />
       </Route>
       <Route exact path="/browse">
-           <Browse />
+        <Browse />
       </Route>
     </div>
 
