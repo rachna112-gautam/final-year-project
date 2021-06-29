@@ -2,6 +2,7 @@ import './App.css';
 import { Route } from 'react-router-dom';
 import Home from './components/Home';
 import SignIn from './components/SignIn';
+import Profile from './components/Profile';
 import IndividualItem from './components/IndividualItem';
 import Web3 from "web3";
 import { useEffect, useState } from 'react';
@@ -11,6 +12,7 @@ import Browse from './components/Browse';
 function App() {
   const [contract, setContract] = useState();
   const [account, setAccount] = useState();
+  const [buyerInfo, setBuyerInfo] = useState();
 
   useEffect(() => {
     setInterval(() => {
@@ -63,6 +65,7 @@ function App() {
   const getBuyerInfo = async () => {
     if (contract && account) {
       let userInfo = await contract.methods.buyers(account).call();
+      setBuyerInfo(userInfo);
       console.log("userInfo", userInfo)
 
     }
@@ -458,7 +461,7 @@ function App() {
   return (
     <div className="app">
       <Route path="/" exact>
-        <Home />
+        <Home buyerInfo={buyerInfo} />
       </Route>
       <Route exact path="/signin">
         <SignIn RegisterAsBuyer={RegisterAsBuyer} />
@@ -468,6 +471,9 @@ function App() {
       </Route>
       <Route exact path="/browse">
         <Browse />
+      </Route>
+      <Route exact path="/profile">
+        <Profile />
       </Route>
     </div>
 
