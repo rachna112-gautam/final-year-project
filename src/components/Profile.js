@@ -81,7 +81,7 @@ export default function Profile() {
 
                                         <div>
                                             <button type="button" className="btn text-white">View</button>
-                                            <button type="button" className="btn btn-primary">Download</button>
+                                            <button type="button" className="btn btn-primary">Download&nbsp;<i class="fas fa-download"></i></button>
                                         </div>
                                     </li>
                                 })}
