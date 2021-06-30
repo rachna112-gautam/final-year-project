@@ -460,6 +460,7 @@ input[type="search"] {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 #v-pills-products ul li .profileImgCon {
@@ -486,4 +487,33 @@ input[type="search"] {
 .btn:focus {
   outline: 0;
   box-shadow: none;
+}
+
+.modal-content {
+  background-color: #475f82 !important;
+}
+
+.modal-header {
+  border-bottom: none !important;
+}
+
+.modal-footer {
+  border-top: none !important;
+}
+
+.col-6.modalImgCon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.btn-close {
+  color: #fff !important;
+}
+
+.col-6 .details div {
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  text-align: center;
+  margin: 0.5rem 0;
 }
