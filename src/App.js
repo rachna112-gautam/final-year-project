@@ -12,7 +12,10 @@ import Browse from './components/Browse';
 function App() {
   const [contract, setContract] = useState();
   const [account, setAccount] = useState();
+  const [balance, setBalance] = useState();
   const [buyerInfo, setBuyerInfo] = useState();
+  const [purchasedItems, setPurchasedItem] = useState();
+  const [items, setItems] = useState();
 
   useEffect(() => {
     setInterval(() => {
@@ -36,7 +39,8 @@ function App() {
       let account = await window.web3.eth.getAccounts();
       setAccount(account[0]);
       let balance = await window.web3.eth.getBalance(account[0])
-      console.log("account & balance", account, balance / 10 ** 18);
+      setBalance(balance)
+      // console.log("account & balance", account, balance / 10 ** 18);
     }
   }
 
@@ -59,16 +63,20 @@ function App() {
         let item = await contract.methods.products(i).call();
         items.push(item);
       }
-      console.log("items", items);
+      setItems(items)
+      // console.log("items", items);
     }
   }
+
+  useEffect(() => {
+    getBuyerInfo()
+  }, [account, contract])
 
   const getBuyerInfo = async () => {
     if (contract && account) {
       let userInfo = await contract.methods.buyers(account).call();
       setBuyerInfo(userInfo);
-      console.log("userInfo", userInfo)
-
+      // console.log("userInfo", userInfo)
     }
   }
 
@@ -78,16 +86,18 @@ function App() {
       let length = await contract.methods.totalPurchasesCount(account).call();
       for (let i = 0; i < length; i++) {
         userInfo[i] = await contract.methods.buyersPurchases(account, i).call();
-        console.log("id & details", await getItemsDetails(userInfo[i]))
+        // console.log("id & details", await getItemsDetails(userInfo[i]))
       }
-      console.log("purchases", userInfo)
+      setPurchasedItem(userInfo)
+      // console.log("purchases", userInfo)
     }
   }
 
   const getItemsDetails = async (id) => {
     if (contract) {
       let item = await contract.methods.products(id).call();
-      console.log("item is", item)
+      // console.log("item is", item)
+      return item;
     }
   }
 
@@ -586,23 +596,34 @@ function App() {
     }
   }
 
+  const buyProduct = async (itemId, price) => {
+    if (contract && account) {
+      await contract.methods.PurchaseItem(itemId).send({ from: account, value: price })
+      alert("pPurchased Successfully")
+
+    }
+  }
 
   return (
     <div className="app">
       <Route path="/" exact>
-        <Home buyerInfo={buyerInfo} />
+        <Home buyerInfo={buyerInfo} items={items} buy={buyProduct} />
       </Route>
       <Route exact path="/signin">
-        <SignIn RegisterAsBuyer={RegisterAsBuyer} />
+        <SignIn buyerInfo={buyerInfo} RegisterAsBuyer={RegisterAsBuyer} />
       </Route>
       <Route exact path="/item">
-        <IndividualItem />
+        <IndividualItem buyerInfo={buyerInfo} buy={buyProduct} />
       </Route>
       <Route exact path="/browse">
-        <Browse />
+        <Browse buyerInfo={buyerInfo} />
       </Route>
       <Route exact path="/profile">
-        <Profile />
+        <Profile buyerInfo={buyerInfo}
+          account={account}
+          balance={balance} purchasedItems={purchasedItems}
+          getItemsDetails={getItemsDetails}
+        />
       </Route>
     </div>
 

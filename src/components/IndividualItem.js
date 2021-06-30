@@ -3,7 +3,7 @@ import Header from './Header';
 import Footer from './Footer';
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-export default function IndividualItem() {
+export default function IndividualItem(props) {
     const location = useLocation();
     const [itemDetail, setItemDetail] = useState({});
     useEffect(() => {
@@ -22,14 +22,14 @@ export default function IndividualItem() {
     return (
 
         <div className="ii">
-            <Header />
+            <Header buyerInfo={props.buyerInfo} />
             <div >
                 <div className="imgCon">
-                    <img src={itemDetail.img} alt={itemDetail.title} />
+                    <img src={itemDetail.imageUrl} alt={itemDetail.name} />
                 </div>
                 <div className="container p-5">
                     <div className="content-title">
-                        <h2>{itemDetail.title}</h2>
+                        <h2>{itemDetail.name}</h2>
                         <div className="Owner">
                             <a href="/userDetail"> Owner <i class="fas fa-user-circle"></i></a>
 
@@ -40,7 +40,9 @@ export default function IndividualItem() {
                             <span>Price</span>
                             <span><i className="fab fa-ethereum"></i>{itemDetail.price}</span>
                         </div>
-                        <button type="button" className="btn browsing">BUY</button>
+                        <button type="button" className="btn browsing" onClick={() => {
+                            props.buy(itemDetail.pid, itemDetail.price)
+                        }}>BUY</button>
                     </div>
                     <div className="highlights">
                         <span>HIGHLIGHT</span>

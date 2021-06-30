@@ -15,15 +15,17 @@ export default function Card(props) {
 
         <div className="card" key={item.id} style={{ "width": "16rem", }} >
             <div className="imgContainer">
-                <img src={item.img} className="card-img-top" alt={item.title} />
+                <img src={item.imageUrl} className="card-img-top" alt={item.name} />
             </div>
             <div className="card-body">
                 <div className="row">
-                    <p className="col-6 mb-0 text-truncate">{item.title}</p>
+                    <p className="col-6 mb-0 text-truncate">{item.name}</p>
                     <div className="col-6 price"><i className="fab fa-ethereum"></i>{item.price}</div>
                 </div>
                 <div className="card-btm">
-                    <button type="button" className="btn">Buy</button>
+                    <button type="button" className="btn" onClick={() => {
+                        props.buy(item.pid, item.price)
+                    }}>Buy</button>
                     <button type="button" className="btn view-btn" onClick={() => {
                         itemOnClickHandle(item)
                     }}>View</button>

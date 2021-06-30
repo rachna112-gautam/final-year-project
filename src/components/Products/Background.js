@@ -1,52 +1,29 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Section from '../Section';
 import Item1 from './../../assets/item1.jpg';
 import Item2 from './../../assets/item2.jpg';
 import Item3 from './../../assets/item3.jpg';
 import Item4 from './../../assets/item4.jpg';
-export default function Background() {
 
-    const items = [{
-        id: 1,
-        img: Item1,
-        price: 20.9,
-        title: 'Purple Background',
-        liked: '',
-        added: '',
-        rating: 4,
-        type: 'background'
-    }, {
-        id: 2,
-        img: Item2,
-        price: 10.1,
-        title: 'Texture & Pattern',
-        liked: '',
-        added: 'added',
-        rating: 3,
-        type: 'background'
-    }, {
-        id: 3,
-        img: Item3,
-        price: 20.01,
-        title: 'Sunset Background',
-        liked: '',
-        added: '',
-        rating: 5,
-        type: 'background'
-    },
-    {
-        id: 4,
-        img: Item4,
-        price: 17.020,
-        title: 'Vintage Car',
-        liked: 'liked',
-        added: '',
-        rating: 4,
-        type: 'background'
-    },
+export default function Background(props) {
+    const [items, setItems] = useState([])
 
-    ]
+    const getItems = async () => {
+
+        let localItems = []
+        if (props.items) {
+            for (let i = 0; i < props.items.length; i++) {
+                localItems.push(props.items[i])
+            }
+            setItems(localItems)
+        }
+    }
+
+    useEffect(() => {
+        getItems()
+    }, [props.items, props.account])
+
     return (
-        <Section items={items} title="Background" />
+        <Section items={items} buy={props.buy} title="Background" />
     )
 }

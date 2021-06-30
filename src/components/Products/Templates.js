@@ -8,27 +8,27 @@ export default function Templates() {
 
     const items = [{
         id: 1,
-        img: template1,
+        imageUrl: template1,
         price: 9,
-        title: 'Portfolio Website',
+        name: 'Portfolio Website',
         liked: '',
         added: '',
         rating: 4,
         type: 'template'
     }, {
         id: 2,
-        img: template2,
+        imageUrl: template2,
         price: 15.09,
-        title: 'Space theme template',
+        name: 'Space theme template',
         liked: '',
         added: 'added',
         rating: 4,
         type: 'template'
     }, {
         id: 3,
-        img: template3,
+        imageUrl: template3,
         price: 12,
-        title: 'Real  estate website',
+        name: 'Real  estate website',
         liked: '',
         added: '',
         rating: 4,
@@ -36,9 +36,9 @@ export default function Templates() {
     },
     {
         id: 4,
-        img: template4,
+        imageUrl: template4,
         price: 10,
-        title: 'Business website',
+        name: 'Business website',
         liked: 'liked',
         added: '',
         rating: 4,

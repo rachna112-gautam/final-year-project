@@ -1,53 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import Item1 from './../assets/item1.jpg';
-import Item2 from './../assets/item2.jpg';
-import Item3 from './../assets/item3.jpg';
-import Item4 from './../assets/item4.jpg';
 
-export default function Profile() {
+export default function Profile(props) {
     const [modalData, setModalData] = useState({})
-    const items = [{
-        id: 1,
-        img: Item1,
-        price: 20.9,
-        title: 'Purple Background',
-        liked: '',
-        added: '',
-        rating: 4,
-        type: 'background'
-    }, {
-        id: 2,
-        img: Item2,
-        price: 10.1,
-        title: 'Texture & Pattern',
-        liked: '',
-        added: 'added',
-        rating: 3,
-        type: 'background'
-    }, {
-        id: 3,
-        img: Item3,
-        price: 20.01,
-        title: 'Sunset Background',
-        liked: '',
-        added: '',
-        rating: 5,
-        type: 'background'
-    },
-    {
-        id: 4,
-        img: Item4,
-        price: 17.020,
-        title: 'Vintage Car',
-        liked: 'liked',
-        added: '',
-        rating: 4,
-        type: 'background'
-    },
+    const [items, setItems] = useState([])
+    const getItems = async () => {
+        let localItem = []
+        if (props.purchasedItems) {
+            for (let i = 0; i < props.purchasedItems.length; i++) {
+                let item = await props.getItemsDetails(props.purchasedItems[i]);
+                localItem.push(item)
+            }
+            setItems(localItem)
+        }
+    }
 
-    ]
+    useEffect(() => {
+        getItems()
+    }, [props.account, props.purchasedItems, props.getItemsDetails])
+
     return (
         <div className="signin">
 
@@ -55,30 +27,30 @@ export default function Profile() {
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">{modalData.title}</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">{modalData.name}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div className="row">
                                 <div className="col-6 modalImgCon">
-                                    <img src={modalData.img} alt="" />
+                                    <img src={modalData.imageUrl} alt="" />
                                 </div>
                                 <div className="col-6">
                                     <div className="details">
-                                        <div>Product ID : {modalData.id}</div>
+                                        <div>Product ID : {modalData.pid}</div>
                                         <div>Price : {modalData.price} ETH</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer">
+                        {/* <div class="modal-footer">
 
                             <button type="button" class="btn btn-primary">Download&nbsp;<i class="fas fa-download"></i></button>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
-            <Header />
+            <Header buyerInfo={props.buyerInfo} />
             <div className="container text-center profile">
                 <div class="d-flex align-items-start">
 
@@ -90,9 +62,10 @@ export default function Profile() {
                     <div class="tab-content w-100 p-3" id="v-pills-tabContent">
                         <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                             <ul>
-                                <li>Wallet address : <span>xxxx</span></li>
-                                <li>Wallet balance : <span>100</span>&nbsp;ETH</li>
-                                <li>Product owned : <span>1</span></li>
+                                <li>Wallet address : <span>{props.account ? props.account.slice(0, 6) + "...." : "0x"}</span></li>
+                                <li>Wallet balance : <span>{props.balance ? (props.balance / 10 ** 18).toFixed(2) : "0.0"}</span>&nbsp;ETH</li>
+                                {console.log("items purchased", props.purchasedItems?.length)}
+                                <li>Product owned : <span>{props.purchasedItems?.length}</span></li>
                             </ul>
                         </div>
                         <div class="tab-pane fade" id="v-pills-products" role="tabpanel" aria-labelledby="v-pills-products-tab">
@@ -100,10 +73,10 @@ export default function Profile() {
                                 {items.map(data => {
                                     return <li>
                                         <div className="profileImgCon">
-                                            <img src={data.img} alt="" />
+                                            <img src={data.imageUrl} alt="" />
                                         </div>
                                         <div className="productDetail">
-                                            {data.title}
+                                            {data.name}
                                             <span>{data.price}&nbsp;ETH</span>
                                         </div>
 
@@ -111,7 +84,7 @@ export default function Profile() {
                                             <button type="button" className="btn text-white" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => {
                                                 setModalData(data);
                                             }}>View</button>
-                                            <button type="button" className="btn btn-primary">Download&nbsp;<i class="fas fa-download"></i></button>
+                                            {/* <button type="button" className="btn btn-primary">Download&nbsp;<i class="fas fa-download"></i></button> */}
                                         </div>
                                     </li>
                                 })}

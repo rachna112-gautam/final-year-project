@@ -11,7 +11,7 @@ import Item2 from './../assets/item2.jpg';
 import Item3 from './../assets/item3.jpg';
 import Item4 from './../assets/item4.jpg';
 import { useLocation } from "react-router-dom";
-export default function Browse() {
+export default function Browse(props) {
     const location = useLocation();
     // console.log(location.state.search);
     const items = [{
@@ -108,7 +108,6 @@ export default function Browse() {
     const searchHandle = (value) => {
         console.log('value-->', value.toLowerCase())
         let result = [];
-        console.log(value);
         result = items.filter((data) => {
 
             return data.title.toLowerCase().search(value) !== -1;
@@ -117,7 +116,7 @@ export default function Browse() {
     }
     return (
         <div>
-            <Header />
+            <Header buyerInfo={props.buyerInfo} />
             <hr />
             <div className="container p-5 ">
                 <div className="row">
