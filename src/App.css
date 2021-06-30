@@ -11,6 +11,26 @@
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #0d6efd #00000061;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #00000061;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #0d6efd;
+  border-radius: 20px;
+  border: 3px solid #141217;
+}
 /**************HEADER****************/
 
 header {
@@ -53,6 +73,21 @@ a {
   text-decoration: underline;
 }
 
+.user-avatar {
+  height: 2rem;
+  width: 2rem;
+  background-color: skyblue;
+  border-radius: 100%;
+  text-align: center;
+  margin: 0 1rem;
+}
+
+.user-avatar i {
+  color: #fff;
+  font-size: 1.2rem;
+  margin: 0.3rem 0;
+  font-weight: bolder;
+}
 /*************MAIN**************/
 .main {
   padding: 4rem 1rem;
@@ -366,4 +401,123 @@ input[type="search"] {
   padding: 0.5rem;
   border-radius: 0.5rem;
   color: #7d7d7d;
+}
+
+/****************PROFILE****************/
+
+.profile {
+  margin: 1rem auto;
+  height: 67.4vh;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: #fff !important;
+  background-color: #41464b !important;
+}
+
+.nav-link {
+  display: block;
+  padding: 0.5rem 5rem;
+  color: #41464b !important;
+}
+
+.nav-link:hover {
+  color: #fff !important;
+}
+#v-pills-profile ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  padding-inline-start: 0px;
+}
+#v-pills-profile ul li {
+  width: 300px;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  font-size: 1.3rem;
+  border-left: 3px solid red;
+  margin: 0.5rem 1rem;
+}
+
+#v-pills-products {
+  white-space: nowrap;
+  max-height: 60vh;
+  overflow-y: scroll;
+}
+#v-pills-products ul {
+  list-style-type: none;
+  padding-inline-start: 0px;
+  width: 100%;
+}
+#v-pills-products ul li {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  border-left: 3px solid #0d6efd;
+  margin: 0.5rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#v-pills-products ul li .profileImgCon {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+}
+
+#v-pills-products ul li .profileImgCon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#v-pills-products ul li .productDetail span {
+  display: inline-block;
+  margin: 0 1rem;
+  background-color: black;
+  padding: 0.4rem;
+  border-radius: 0.3rem;
+}
+
+.btn-check:focus + .btn,
+.btn:focus {
+  outline: 0;
+  box-shadow: none;
+}
+
+.modal-content {
+  background-color: #475f82 !important;
+}
+
+.modal-header {
+  border-bottom: none !important;
+}
+
+.modal-footer {
+  border-top: none !important;
+}
+
+.col-6.modalImgCon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.btn-close {
+  color: #fff !important;
+}
+
+.btn-close:hover {
+  box-shadow: none !important;
+}
+
+.col-6 .details div {
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  text-align: center;
+  margin: 0.5rem 0;
 }
